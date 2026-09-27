@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<title>ATELIER</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#ff9ec7 0%,#ffb8d6 40%,#ffe4ef 100%);height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.top{height:70px;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 20px;box-shadow:0 4px 30px rgba(0,0,0,0.08)}
+.logo{font-weight:800;letter-spacing:3px;font-size:18px;color:#222}.logo span{color:#ff2e8a}
+.coins{background:#222;color:#fff;padding:8px 14px;border-radius:20px;font-size:12px}
+.stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center}
+.room{position:absolute;inset:15px;background:linear-gradient(180deg,#fff 0%,#fff8fb 100%);border-radius:30px;box-shadow:0 20px 60px rgba(255,46,138,0.15),inset 0 1px 0 #fff;overflow:hidden}
+.room::before{content:'';position:absolute;top:0;left:0;right:0;height:60%;background:radial-gradient(ellipse at 50% 0%,rgba(255,46,138,0.08),transparent 70%)}
+.model{position:absolute;left:50%;top:50%;transform:translate(-50%,-48%);width:240px;height:520px;transition:0.6s}
+.head-wrap{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:125px;z-index:10}
+.face{width:100%;height:100%;background:radial-gradient(ellipse at 30% 20%,#ffecd2 0%,#fcb69f 60%,#f7a08a 100%);border-radius:55px 55px 48px 48px;position:relative;box-shadow:0 8px 25px rgba(0,0,0,0.12)}
+.hair-back{position:absolute;top:-10px;left:-12px;right:-12px;height:90px;background:var(--hair,#1a1a1a);border-radius:50px 50px 20px 20px;z-index:-1}
+.hair-front{position:absolute;top:-8px;left:-8px;right:-8px;height:45px;background:var(--hair,#1a1a1a);border-radius:50px 50px 10px 10px}
+.eye{position:absolute;top:52px;width:26px;height:26px;background:#fff;border-radius:50%;box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);overflow:hidden}
+.eye.left{left:16px}.eye.right{right:16px}
+.pupil{position:absolute;top:6px;left:6px;width:14px;height:14px;background:#3a2317;border-radius:50%}.pupil::after{content:'';position:absolute;top:2px;left:2px;width:5px;height:5px;background:#fff;border-radius:50%}
+.eyelid{position:absolute;top:0;left:0;right:0;height:0%;background:#fcb69f;z-index:2;animation:blink 4s infinite}
+@keyframes blink{0%,92%,100%{height:0%}94%{height:100%}95%{height:0%}}
+.cheek{position:absolute;top:75px;width:18px;height:10px;background:rgba(255,46,138,0.25);border-radius:50%;filter:blur(2px)}.cheek.l{left:6px}.cheek.r{right:6px}
+.lip{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:22px;height:12px;background:linear-gradient(#ff4d8a,#cc1a5a);border-radius:0 0 20px 20px}
+.body{position:absolute;top:118px;left:50%;transform:translateX(-50%);width:86px;height:110px;background:linear-gradient(#ffecd2,#fcb69f);border-radius:26px;z-index:5}
+.arms{position:absolute;top:125px;left:50%;transform:translateX(-50%);width:140px;height:100px;display:flex;justify-content:space-between;z-index:4}.arm{width:26px;height:90px;background:linear-gradient(#ffecd2,#fcb69f);border-radius:15px}
+.legs-wrap{position:absolute;top:220px;left:50%;transform:translateX(-50%);width:80px;height:200px;display:flex;gap:6px;z-index:4}.leg{flex:1;background:linear-gradient(#ffecd2,#f7a08a);border-radius:0 0 20px 20px}
+.outfit{position:absolute;z-index:6;left:50%;transform:translateX(-50%);transition:0.5s}
+.dress{top:118px;width:126px;height:190px;background:var(--dress,#000);border-radius:26px 26px 40px 40px;box-shadow:0 10px 30px rgba(0,0,0,0.15)}
+.closet{height:210px;background:rgba(255,255,255,0.92);backdrop-filter:blur(30px);border-radius:30px 30px 0 0;padding:14px 16px;box-shadow:0 -10px 40px rgba(0,0,0,0.08)}
+.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;padding:10px;background:#f5f5f5;border-radius:14px;text-align:center;font-size:11px;letter-spacing:1px;color:#888;cursor:pointer;transition:0.2s}.tab.active{background:#222;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
+.grid{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}.grid::-webkit-scrollbar{display:none}
+.card{min-width:72px;height:72px;background:#fff;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 15px rgba(0,0,0,0.06);border:2px solid transparent;cursor:pointer;transition:0.2s;position:relative}.card.active{border-color:#ff2e8a;transform:translateY(-4px);box-shadow:0 8px 25px rgba(255,46,138,0.25)}.card span{position:absolute;bottom:4px;font-size:7px;letter-spacing:1px;color:#aaa}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">ATELIER <span>STUDIO</span></div><div class="coins">💎 2,450</div></div>
+<div class="stage"><div class="room"><div class="model" id="model">
+<div class="head-wrap"><div class="hair-back" id="hairBack"></div><div class="face"><div class="eye left"><div class="eyelid"></div><div class="pupil"></div></div><div class="eye right"><div class="eyelid"></div><div class="pupil"></div></div><div class="cheek l"></div><div class="cheek r"></div><div class="lip"></div></div><div class="hair-front" id="hairFront"></div></div>
+<div class="body"></div><div class="arms"><div class="arm"></div><div class="arm"></div></div><div class="legs-wrap"><div class="leg"></div><div class="leg"></div></div>
+<div class="outfit dress" id="dress"></div>
+</div></div></div>
+<div class="closet">
+<div class="tabs"><div class="tab active" onclick="tab(this,'dress')">DRESSES</div><div class="tab" onclick="tab(this,'hair')">HAIR</div><div class="tab" onclick="tab(this,'shoe')">SHOES</div></div>
+<div class="grid" id="grid"></div>
+</div>
+<script>
+const dresses=[{c:'#0a0a0a',e:'🖤',n:'NOIR'},{c:'linear-gradient(180deg,#ff003c,#7a001d)',e:'❤️',n:'ROUGE'},{c:'linear-gradient(180deg,#ffffff,#e8e8e8)',e:'🤍',n:'BLANC'},{c:'linear-gradient(180deg,#ff8a00,#ff2e8a)',e:'🌅',n:'SUNSET'},{c:'linear-gradient(180deg,#8a2be2,#4b0082)',e:'💜',n:'ROYAL'},{c:'linear-gradient(180deg,#00f5ff,#0066ff)',e:'💙',n:'OCEAN'},{c:'linear-gradient(180deg,#d4af37,#8b6914)',e:'✨',n:'GOLD'}];
+const hairs=[{c:'#0a0a0a',e:'🖤'},{c:'#4a2c17',e:'🤎'},{c:'#e6b87a',e:'💛'},{c:'#ff6b6b',e:'❤️'},{c:'#8a2be2',e:'💜'},{c:'#ffffff',e:'🤍'}];
+let cur='dress';
+function render(){
+let g=document.getElementById('grid');g.innerHTML='';
+let list=cur=='dress'?dresses:hairs;
+list.forEach((it,i)=>{
+let d=document.createElement('div');d.className='card'+(i==0?' active':'');d.innerHTML=`${it.e}<span>${it.n||''}</span>`;
+d.onclick=()=>{
+document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));d.classList.add('active');
+if(cur=='dress')document.getElementById('dress').style.background=it.c;
+else{document.getElementById('hairBack').style.setProperty('--hair',it.c);document.getElementById('hairFront').style.setProperty('--hair',it.c);document.getElementById('hairBack').style.background=it.c;document.getElementById('hairFront').style.background=it.c;}
+};
+g.appendChild(d);
+});
+}
+function tab(el,type){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');cur=type;render();}
+render();
+document.getElementById('hairBack').style.background='#0a0a0a';document.getElementById('hairFront').style.background='#0a0a0a';
+</script>
+</body>
+</html>
