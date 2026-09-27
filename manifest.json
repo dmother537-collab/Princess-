@@ -1,0 +1,22 @@
+{
+  "name": "ATELIER - Fashion Studio",
+  "short_name": "ATELIER",
+  "description": "Premium Fashion Model Dress Up Studio - Like Talking Angela",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffe4ef",
+  "theme_color": "#ff2e8a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2970/2970753.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2970/2970753.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
